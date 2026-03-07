@@ -121,8 +121,8 @@ final class WebViewCoordinator: NSObject,
         #if DEBUG
         injectFromDisk(into: webView)
         #endif
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.appState.isLoading = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.appState.isLoading = false
         }
     }
 
