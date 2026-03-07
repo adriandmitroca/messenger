@@ -5,14 +5,18 @@ import WebKit
 struct PigeonApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState()
-    private let statusBar = StatusBarController()
+    @State private var statusBar: StatusBarController?
 
     var body: some Scene {
         WindowGroup {
             MessengerWebView()
                 .environmentObject(appState)
                 .frame(minWidth: 400, idealWidth: 900, minHeight: 500, idealHeight: 700)
-                .onAppear { statusBar.setup(appState: appState) }
+                .onAppear {
+                    let controller = StatusBarController()
+                    controller.setup(appState: appState)
+                    statusBar = controller
+                }
         }
         .windowStyle(.titleBar)
         .windowToolbarStyle(.unified)
