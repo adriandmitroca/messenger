@@ -17,8 +17,6 @@ targets:
     platform: macOS
     sources:
       - Messenger
-      - path: messenger-macos-brief.md
-        buildPhase: none
       - path: .gitignore
         buildPhase: none
     dependencies:
@@ -27,7 +25,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.messenger.app
         PRODUCT_NAME: Messenger
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "0.0.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "6.0"
         INFOPLIST_FILE: Messenger/Resources/Info.plist

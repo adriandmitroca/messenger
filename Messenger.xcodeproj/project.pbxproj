@@ -28,7 +28,6 @@
 		126FF3A11F3A912F21E05D8B /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		1642BCB24F330295F4F85343 /* notification-bridge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "notification-bridge.js"; sourceTree = "<group>"; };
 		1F0EF838D2D6D8CF8479BCF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2E310D892C191AAAAF823E9D /* messenger-macos-brief.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "messenger-macos-brief.md"; sourceTree = "<group>"; };
 		2F3F042A77F8E79A74CE4294 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		317516E3672539233560562F /* WebViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFactory.swift; sourceTree = "<group>"; };
 		34999CF10F9E4722F8C20423 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -123,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				A88307D6F414B26B96DABC7F /* .gitignore */,
-				2E310D892C191AAAAF823E9D /* messenger-macos-brief.md */,
 				BE4A4B10CFE50887C2647176 /* Messenger */,
 				8DA6F63064AFB1E38F85041C /* Products */,
 			);

@@ -10,7 +10,7 @@
 		<true/>
 	</dict>
 	<key>SUFeedURL</key>
-	<string>https://example.com/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/adriandmitroca/messenger/main/appcast.xml</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Messenger needs camera access for video calls.</string>
 	<key>NSMicrophoneUsageDescription</key>
