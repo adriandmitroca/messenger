@@ -4,9 +4,12 @@ import Combine
 @MainActor
 final class StatusBarController: NSObject {
     private var statusItem: NSStatusItem?
-    private var cancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
+    private var currentlyShowingBadge = false
+    private weak var appState: AppState?
 
     func setup(appState: AppState) {
+        self.appState = appState
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
@@ -18,17 +21,23 @@ final class StatusBarController: NSObject {
             button.action = #selector(statusItemClicked)
         }
 
-        cancellable = appState.$unreadCount
+        appState.$unreadCount
             .removeDuplicates()
             .receive(on: RunLoop.main)
-            .sink { [weak self] count in
-                self?.updateBadge(count: count)
-            }
+            .sink { [weak self] _ in self?.updateBadge() }
+            .store(in: &cancellables)
+
+        SettingsManager.shared.$menuBarBadgeEnabled
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in self?.updateBadge() }
+            .store(in: &cancellables)
     }
 
-    private func updateBadge(count: Int) {
+    private func updateBadge() {
         guard let button = statusItem?.button else { return }
-        let showBadge = count > 0 && SettingsManager.shared.menuBarBadgeEnabled
+        let showBadge = (appState?.unreadCount ?? 0) > 0 && SettingsManager.shared.menuBarBadgeEnabled
+        guard showBadge != currentlyShowingBadge else { return }
+        currentlyShowingBadge = showBadge
         button.image = NSImage(
             systemSymbolName: showBadge ? "message.badge.fill" : "message.fill",
             accessibilityDescription: "Messenger"
@@ -36,9 +45,6 @@ final class StatusBarController: NSObject {
     }
 
     @objc private func statusItemClicked() {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        if let window = NSApplication.shared.windows.first {
-            window.makeKeyAndOrderFront(nil)
-        }
+        (NSApplication.shared.delegate as? AppDelegate)?.showMainWindow()
     }
 }
