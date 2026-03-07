@@ -1,31 +1,7 @@
 (function() {
     'use strict';
 
-    // === DOM CLEANUP via MutationObserver ===
-    const SELECTORS_TO_REMOVE = [
-        '[data-testid="reels_surface"]',
-        '[data-testid="pymk"]',
-        '[data-testid="messenger_ad"]',
-        '.notificationContainer:not([data-messenger])',
-    ];
-
-    let cleanupTimer = null;
-    const observer = new MutationObserver(() => {
-        if (cleanupTimer) return;
-        cleanupTimer = setTimeout(() => {
-            cleanupTimer = null;
-            for (const selector of SELECTORS_TO_REMOVE) {
-                document.querySelectorAll(selector).forEach(el => el.remove());
-            }
-        }, 200);
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
-    // === EXTERNAL LINK INTERCEPTION ===
+    // Open external links in the system browser
     document.addEventListener('click', (e) => {
         const anchor = e.target.closest('a[href]');
         if (!anchor) return;
