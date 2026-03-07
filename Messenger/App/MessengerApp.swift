@@ -11,8 +11,13 @@ struct MessengerApp: App {
     private let updaterController: SPUStandardUpdaterController
 
     init() {
+        #if DEBUG
+        let startUpdater = false
+        #else
+        let startUpdater = true
+        #endif
         updaterController = SPUStandardUpdaterController(
-            startingUpdater: true,
+            startingUpdater: startUpdater,
             updaterDelegate: nil,
             userDriverDelegate: nil
         )
