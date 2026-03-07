@@ -15,6 +15,19 @@ final class WebViewCoordinator: NSObject,
         self.appState = appState
     }
 
+    // MARK: - Domain Filtering
+
+    private static let allowedDomains = [
+        "facebook.com", "www.facebook.com",
+        "messenger.com", "www.messenger.com",
+        "fbcdn.net", "facebook.net",
+        "fbsbx.com", "accountkit.com", "fb.com",
+    ]
+
+    private static func isAllowedDomain(_ host: String) -> Bool {
+        allowedDomains.contains { host.hasSuffix($0) }
+    }
+
     // MARK: - WKScriptMessageHandler
 
     func userContentController(
@@ -28,13 +41,11 @@ final class WebViewCoordinator: NSObject,
             }
         case "unreadCount":
             if let count = message.body as? Int, count != appState.unreadCount {
-                DispatchQueue.main.async {
-                    self.appState.unreadCount = count
-                    if SettingsManager.shared.dockBadgeEnabled {
-                        NSApplication.shared.dockTile.badgeLabel = count > 0 ? "\(count)" : nil
-                    } else {
-                        NSApplication.shared.dockTile.badgeLabel = nil
-                    }
+                appState.unreadCount = count
+                if SettingsManager.shared.dockBadgeEnabled {
+                    NSApplication.shared.dockTile.badgeLabel = count > 0 ? "\(count)" : nil
+                } else {
+                    NSApplication.shared.dockTile.badgeLabel = nil
                 }
             }
         case "externalLink":
@@ -48,13 +59,6 @@ final class WebViewCoordinator: NSObject,
 
     // MARK: - WKNavigationDelegate
 
-    private static let allowedDomains = [
-        "facebook.com", "www.facebook.com",
-        "messenger.com", "www.messenger.com",
-        "fbcdn.net", "facebook.net",
-        "fbsbx.com", "accountkit.com", "fb.com",
-    ]
-
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction
@@ -64,9 +68,8 @@ final class WebViewCoordinator: NSObject,
         }
 
         let host = url.host ?? ""
-        let isAllowed = Self.allowedDomains.contains { host.hasSuffix($0) }
 
-        if isAllowed || url.scheme == "about" || url.scheme == "data" {
+        if Self.isAllowedDomain(host) || url.scheme == "about" || url.scheme == "data" {
             return .allow
         } else {
             NSWorkspace.shared.open(url)
@@ -81,8 +84,7 @@ final class WebViewCoordinator: NSObject,
         windowFeatures: WKWindowFeatures
     ) -> WKWebView? {
         if let url = navigationAction.request.url {
-            let host = url.host ?? ""
-            if host.contains("facebook.com") || host.contains("messenger.com") {
+            if Self.isAllowedDomain(url.host ?? "") {
                 webView.load(navigationAction.request)
             } else {
                 NSWorkspace.shared.open(url)
@@ -99,11 +101,7 @@ final class WebViewCoordinator: NSObject,
         initiatedBy frame: WKFrameInfo,
         type: WKMediaCaptureType
     ) async -> WKPermissionDecision {
-        if origin.host.contains("facebook.com") || origin.host.contains("messenger.com") {
-            return .grant
-        } else {
-            return .deny
-        }
+        Self.isAllowedDomain(origin.host) ? .grant : .deny
     }
 
     // MARK: - Downloads
@@ -121,10 +119,28 @@ final class WebViewCoordinator: NSObject,
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        #if DEBUG
+        injectFromDisk(into: webView)
+        #endif
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.appState.isLoading = false
         }
     }
+
+    #if DEBUG
+    private func injectFromDisk(into webView: WKWebView) {
+        if let css = ContentInjector.loadCSS() {
+            let js = """
+                document.querySelectorAll('[data-hot-reload]').forEach(e => e.remove());
+                var style = document.createElement('style');
+                style.dataset.hotReload = '1';
+                style.textContent = `\(css)`;
+                document.head.appendChild(style);
+            """
+            webView.evaluateJavaScript(js)
+        }
+    }
+    #endif
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
