@@ -12,6 +12,10 @@ targets:
     platform: macOS
     sources:
       - Pigeon
+      - path: messenger-macos-brief.md
+        buildPhase: none
+      - path: .gitignore
+        buildPhase: none
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.pigeon.app
