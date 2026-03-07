@@ -12,7 +12,7 @@
     }],
     ["@semantic-release/github", {
       "assets": [
-        { "path": "build/release/Messenger-*.zip", "label": "Messenger-${nextRelease.version}.zip" }
+        { "path": "build/release/Messenger-*.dmg", "label": "Messenger-${nextRelease.version}.dmg" }
       ]
     }]
   ]
