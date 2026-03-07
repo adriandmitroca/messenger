@@ -3,31 +3,7 @@ import WebKit
 
 @MainActor
 enum ContentInjector {
-    #if DEBUG
-    private static let sourceRoot: String? = {
-        // Walk up from the bundle to find the project source directory
-        var url = Bundle.main.bundleURL
-        for _ in 0..<5 {
-            url = url.deletingLastPathComponent()
-            let candidate = url.appendingPathComponent("Messenger/Injection")
-            if FileManager.default.fileExists(atPath: candidate.path) {
-                print("[Messenger] Hot reload from: \(candidate.path)")
-                return candidate.path
-            }
-        }
-        return nil
-    }()
-    #endif
-
     private static func loadFile(name: String, ext: String) -> String? {
-        #if DEBUG
-        if let root = sourceRoot {
-            let path = "\(root)/\(name).\(ext)"
-            if let content = try? String(contentsOfFile: path, encoding: .utf8) {
-                return content
-            }
-        }
-        #endif
         guard let url = Bundle.main.url(forResource: name, withExtension: ext),
               let content = try? String(contentsOf: url, encoding: .utf8) else {
             return nil

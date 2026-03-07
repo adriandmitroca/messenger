@@ -118,28 +118,10 @@ final class WebViewCoordinator: NSObject,
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        #if DEBUG
-        injectFromDisk(into: webView)
-        #endif
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.appState.isLoading = false
         }
     }
-
-    #if DEBUG
-    private func injectFromDisk(into webView: WKWebView) {
-        if let css = ContentInjector.loadCSS() {
-            let js = """
-                document.querySelectorAll('[data-hot-reload]').forEach(e => e.remove());
-                var style = document.createElement('style');
-                style.dataset.hotReload = '1';
-                style.textContent = `\(css)`;
-                document.head.appendChild(style);
-            """
-            webView.evaluateJavaScript(js)
-        }
-    }
-    #endif
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
