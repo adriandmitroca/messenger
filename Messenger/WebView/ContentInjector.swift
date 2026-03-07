@@ -36,7 +36,10 @@ enum ContentInjector {
     }
 
     static func loadCSS() -> String? {
-        loadFile(name: "facebook-cleanup", ext: "css")
+        loadFile(name: "facebook-cleanup", ext: "css")?
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "`", with: "\\`")
+            .replacingOccurrences(of: "${", with: "\\${")
     }
 
     static func loadJS() -> String? {
