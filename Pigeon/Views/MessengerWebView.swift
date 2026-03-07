@@ -16,6 +16,7 @@ struct MessengerWebView: NSViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         context.coordinator.webView = webView
+        appState.webView = webView
 
         let url = URL(string: "https://www.facebook.com/messages/")!
         webView.load(URLRequest(url: url))
