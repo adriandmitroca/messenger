@@ -4,7 +4,7 @@
 
 - **XcodeGen** project — run `xcodegen generate` after changing `project.yml`
 - Build: `xcodebuild -project Messenger.xcodeproj -scheme Messenger -configuration Debug build`
-- No external dependencies (no SPM packages)
+- SPM dependency: Sparkle (auto-update framework)
 
 ## Key Paths
 
@@ -18,7 +18,7 @@
 ## Conventions
 
 - Swift 6.0 with `SWIFT_STRICT_CONCURRENCY: minimal`
-- `@MainActor` on types that touch UI (WebViewFactory, StatusBarController)
+- `@MainActor` on types that touch UI (WebViewFactory, StatusBarController, SettingsManager)
 - CSS/JS injection happens via `ContentInjector` → `WKUserScript` at document end
 - All Facebook domain filtering is in `WebViewCoordinator.allowedDomains`
 

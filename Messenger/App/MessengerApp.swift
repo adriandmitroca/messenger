@@ -1,5 +1,6 @@
 import SwiftUI
 import WebKit
+import Sparkle
 
 @main
 struct MessengerApp: App {
@@ -7,10 +8,21 @@ struct MessengerApp: App {
     @StateObject private var appState = AppState()
     @State private var statusBar: StatusBarController?
 
+    private let updaterController: SPUStandardUpdaterController
+
+    init() {
+        updaterController = SPUStandardUpdaterController(
+            startingUpdater: true,
+            updaterDelegate: nil,
+            userDriverDelegate: nil
+        )
+    }
+
     var body: some Scene {
         WindowGroup {
             MessengerWebView()
                 .environmentObject(appState)
+                .ignoresSafeArea()
                 .frame(minWidth: 400, idealWidth: 900, minHeight: 500, idealHeight: 700)
                 .onAppear {
                     let controller = StatusBarController()
@@ -18,8 +30,7 @@ struct MessengerApp: App {
                     statusBar = controller
                 }
         }
-        .windowStyle(.titleBar)
-        .windowToolbarStyle(.unified)
+        .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 900, height: 700)
         .commands {
             CommandGroup(replacing: .newItem) {
@@ -75,6 +86,16 @@ struct MessengerApp: App {
                     }
                 }
             }
+
+            CommandGroup(after: .appInfo) {
+                Button("Check for Updates...") {
+                    updaterController.checkForUpdates(nil)
+                }
+            }
+        }
+
+        Settings {
+            SettingsView(updater: updaterController.updater)
         }
     }
 

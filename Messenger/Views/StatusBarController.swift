@@ -27,8 +27,9 @@ final class StatusBarController: NSObject {
 
     private func updateBadge(count: Int) {
         guard let button = statusItem?.button else { return }
+        let showBadge = count > 0 && SettingsManager.shared.menuBarBadgeEnabled
         button.image = NSImage(
-            systemSymbolName: count > 0 ? "message.badge.fill" : "message.fill",
+            systemSymbolName: showBadge ? "message.badge.fill" : "message.fill",
             accessibilityDescription: "Messenger"
         )
     }

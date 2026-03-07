@@ -8,9 +8,10 @@ Messenger is a native macOS wrapper around Facebook's web-based Messenger (`face
 
 ### App Layer (`Messenger/App/`)
 
-- **MessengerApp.swift** — `@main` entry point using SwiftUI `App` protocol. Defines the window, menu commands (New Message, Reload, Zoom, Search, Log Out), and initializes the status bar controller.
-- **AppDelegate.swift** — Handles `UNUserNotificationCenter` setup. Registers a "Reply" text input action on the `MESSAGE` notification category. Configures notification presentation behavior (suppressed when app is active).
+- **MessengerApp.swift** — `@main` entry point using SwiftUI `App` protocol. Defines the window, menu commands (New Message, Reload, Zoom, Search, Log Out), initializes the status bar controller, Sparkle updater, and Settings scene.
+- **AppDelegate.swift** — Handles `UNUserNotificationCenter` setup. Registers a "Reply" text input action on the `MESSAGE` notification category. Configures notification presentation behavior (suppressed when app is active, respects sound preference).
 - **AppState.swift** — `ObservableObject` holding shared state: `unreadCount` (published) and a weak reference to the `WKWebView`.
+- **SettingsManager.swift** — `@MainActor` singleton wrapping `UserDefaults` for app preferences: notifications, sound, dock badge, menu bar badge, launch at login. Uses `SMAppService` for login item registration.
 
 ### WebView Layer (`Messenger/WebView/`)
 
@@ -26,7 +27,8 @@ Messenger is a native macOS wrapper around Facebook's web-based Messenger (`face
 ### Views (`Messenger/Views/`)
 
 - **MessengerWebView.swift** — `NSViewRepresentable` bridging WKWebView to SwiftUI. Loads `facebook.com/messages/` on appear.
-- **StatusBarController.swift** — Creates an `NSStatusItem` with a message icon. Observes `appState.unreadCount` and toggles between `message.fill` and `message.badge.fill` SF Symbols.
+- **StatusBarController.swift** — Creates an `NSStatusItem` with a message icon. Observes `appState.unreadCount` and toggles between `message.fill` and `message.badge.fill` SF Symbols. Respects `menuBarBadgeEnabled` setting.
+- **SettingsView.swift** — SwiftUI `Settings` scene with three tabs: General (launch at login), Notifications (enable/disable notifications, sound, dock badge, menu bar badge), Updates (auto-check toggle, manual check button via Sparkle).
 
 ### Injected Content (`Messenger/Injection/`)
 
@@ -36,8 +38,8 @@ Messenger is a native macOS wrapper around Facebook's web-based Messenger (`face
 
 ## Configuration
 
-- **project.yml** — XcodeGen project spec. Bundle ID: `com.messenger.app`. Deployment target: macOS 14.0. Swift 6.0.
-- **Info.plist** — Camera and microphone usage descriptions. Allows arbitrary loads in web content.
+- **project.yml** — XcodeGen project spec. Bundle ID: `com.messenger.app`. Deployment target: macOS 14.0. Swift 6.0. Sparkle SPM dependency.
+- **Info.plist** — Camera and microphone usage descriptions. Allows arbitrary loads in web content. `SUFeedURL` for Sparkle appcast.
 - **Messenger.entitlements** — Network client, camera, audio input, downloads read-write.
 
 ## Data Flow
@@ -49,6 +51,10 @@ WKScriptMessageHandler (WebViewCoordinator)
     ↓
 AppState.unreadCount ──→ StatusBarController (menu bar badge)
                      ──→ NSApplication.dockTile.badgeLabel
-notificationBridge   ──→ UNUserNotificationCenter (native notification)
+notificationBridge   ──→ UNUserNotificationCenter (native notification, if enabled)
 externalLink         ──→ NSWorkspace.shared.open(url)
+
+SettingsManager      ──→ UserDefaults (notifications, sound, badges, launch at login)
+                     ──→ SMAppService (login item)
+SPUUpdater           ──→ Sparkle (auto-update via appcast)
 ```

@@ -23,12 +23,18 @@ final class WebViewCoordinator: NSObject,
     ) {
         switch message.name {
         case "notificationBridge":
-            handleNotification(message.body)
+            if SettingsManager.shared.notificationsEnabled {
+                handleNotification(message.body)
+            }
         case "unreadCount":
             if let count = message.body as? Int {
                 DispatchQueue.main.async {
                     self.appState.unreadCount = count
-                    NSApplication.shared.dockTile.badgeLabel = count > 0 ? "\(count)" : nil
+                    if SettingsManager.shared.dockBadgeEnabled {
+                        NSApplication.shared.dockTile.badgeLabel = count > 0 ? "\(count)" : nil
+                    } else {
+                        NSApplication.shared.dockTile.badgeLabel = nil
+                    }
                 }
             }
         case "externalLink":
@@ -114,6 +120,12 @@ final class WebViewCoordinator: NSObject,
         return downloadsURL.appendingPathComponent(suggestedFilename)
     }
 
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.appState.isLoading = false
+        }
+    }
+
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
     }
@@ -127,7 +139,7 @@ final class WebViewCoordinator: NSObject,
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = (dict["body"] as? String) ?? ""
-        content.sound = .default
+        content.sound = SettingsManager.shared.soundEnabled ? .default : nil
         content.categoryIdentifier = "MESSAGE"
 
         let identifier = (dict["tag"] as? String) ?? UUID().uuidString

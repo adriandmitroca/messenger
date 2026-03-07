@@ -3,6 +3,7 @@ import UserNotifications
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
+        configureMainWindow()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             if granted {
                 print("[Messenger] Notification permission granted")
@@ -23,6 +24,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             options: .customDismissAction
         )
         UNUserNotificationCenter.current().setNotificationCategories([category])
+    }
+
+    private func configureMainWindow() {
+        DispatchQueue.main.async {
+            guard let window = NSApplication.shared.windows.first else { return }
+            window.titlebarAppearsTransparent = true
+            window.titleVisibility = .hidden
+            window.styleMask.insert(.fullSizeContentView)
+            window.isMovableByWindowBackground = true
+            window.backgroundColor = NSColor(red: 36/255, green: 37/255, blue: 38/255, alpha: 1)
+        }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -48,7 +60,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if NSApplication.shared.isActive {
             completionHandler([])
         } else {
-            completionHandler([.banner, .sound, .badge])
+            var options: UNNotificationPresentationOptions = [.banner, .badge]
+            if UserDefaults.standard.bool(forKey: "soundEnabled") {
+                options.insert(.sound)
+            }
+            completionHandler(options)
         }
     }
 }
