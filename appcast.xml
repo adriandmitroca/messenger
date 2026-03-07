@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Messenger Updates</title>
+    <link>https://github.com/adriandmitroca/messenger</link>
+    <item>
+      <title>Version 0.0.1</title>
+      <sparkle:version>0.0.1</sparkle:version>
+      <sparkle:shortVersionString>0.0.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <pubDate>Sat, 07 Mar 2026 22:57:04 +0000</pubDate>
+      <enclosure
+        url="https://github.com/adriandmitroca/messenger/releases/download/v0.0.1/Messenger-0.0.1.zip"
+        type="application/octet-stream"
+        sparkle:edSignature="f663bpbNZUcFO4wWBdGpeR2ANy9QUBmu/z2ZdBkHjATDMl1ZdRf2wCk3bO2r/xmhtnbDNkgHXu0WEjwLYwuXCA=="
+        length="1210017"
+      />
+    </item>
+  </channel>
+</rss>
