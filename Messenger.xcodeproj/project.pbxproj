@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CCAA704B080E39DE94918B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B15DBE4DE011F7F21BBC13 /* Constants.swift */; };
 		42B6FBD3BC7AFA9966D9B641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFD7943F9A7137BBF6178C /* SettingsView.swift */; };
 		540568147DC33B8C367B7F63 /* ContentInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3585459F4A95342FB3435C /* ContentInjector.swift */; };
 		6C9BF4C7842308D4956C7E70 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34999CF10F9E4722F8C20423 /* AppState.swift */; };
@@ -39,6 +40,7 @@
 		ABA6931793957575AD2116BE /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		CC49707ABFE0A6767C867CE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDB81F556E745032FB280B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D6B15DBE4DE011F7F21BBC13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E4B901147D9E10DC7E7097A9 /* facebook-cleanup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "facebook-cleanup.js"; sourceTree = "<group>"; };
 		EE3585459F4A95342FB3435C /* ContentInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInjector.swift; sourceTree = "<group>"; };
 		F5BFD7943F9A7137BBF6178C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				1F0EF838D2D6D8CF8479BCF8 /* AppDelegate.swift */,
 				34999CF10F9E4722F8C20423 /* AppState.swift */,
+				D6B15DBE4DE011F7F21BBC13 /* Constants.swift */,
 				FFD3A66817D2EA023DD03F5F /* MessengerApp.swift */,
 				ABA6931793957575AD2116BE /* SettingsManager.swift */,
 			);
@@ -214,6 +217,7 @@
 			files = (
 				D470AA22B7B41719AB51EDBE /* AppDelegate.swift in Sources */,
 				6C9BF4C7842308D4956C7E70 /* AppState.swift in Sources */,
+				2CCAA704B080E39DE94918B6 /* Constants.swift in Sources */,
 				540568147DC33B8C367B7F63 /* ContentInjector.swift in Sources */,
 				D7E2E89473E7BBD7A3E9E0C0 /* MessengerApp.swift in Sources */,
 				CB7DAE464A76C81EAA477EA8 /* MessengerWebView.swift in Sources */,
@@ -235,14 +239,14 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app;
 				PRODUCT_NAME = Messenger;
 				SDKROOT = macosx;
@@ -322,14 +326,14 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app;
 				PRODUCT_NAME = Messenger;
 				SDKROOT = macosx;

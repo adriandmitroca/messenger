@@ -20,7 +20,7 @@ struct MessengerWebView: View {
 
     private var loadingView: some View {
         ZStack {
-            Color(nsColor: NSColor(red: 36/255, green: 37/255, blue: 38/255, alpha: 1))
+            Color(nsColor: Constants.windowBackground)
                 .ignoresSafeArea()
 
             VStack(spacing: 12) {
@@ -53,9 +53,9 @@ struct WebViewWrapper: NSViewRepresentable {
         let config = WebViewFactory.makeConfiguration()
 
         let contentController = config.userContentController
-        contentController.add(context.coordinator, name: "notificationBridge")
-        contentController.add(context.coordinator, name: "unreadCount")
-        contentController.add(context.coordinator, name: "externalLink")
+        for handler in Constants.MessageHandler.allCases {
+            contentController.add(context.coordinator, name: handler.rawValue)
+        }
 
         let webView = WebViewFactory.makeWebView(config: config)
         webView.navigationDelegate = context.coordinator
@@ -63,8 +63,7 @@ struct WebViewWrapper: NSViewRepresentable {
         context.coordinator.webView = webView
         appState.webView = webView
 
-        let url = URL(string: "https://www.facebook.com/messages/")!
-        webView.load(URLRequest(url: url))
+        webView.load(URLRequest(url: Constants.messengerURL))
 
         return webView
     }

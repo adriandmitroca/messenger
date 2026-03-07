@@ -34,12 +34,13 @@ final class WebViewCoordinator: NSObject,
         _ controller: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
-        switch message.name {
-        case "notificationBridge":
+        guard let handler = Constants.MessageHandler(rawValue: message.name) else { return }
+        switch handler {
+        case .notificationBridge:
             if SettingsManager.shared.notificationsEnabled {
                 handleNotification(message.body)
             }
-        case "unreadCount":
+        case .unreadCount:
             if let count = message.body as? Int, count != appState.unreadCount {
                 appState.unreadCount = count
                 if SettingsManager.shared.dockBadgeEnabled {
@@ -48,12 +49,10 @@ final class WebViewCoordinator: NSObject,
                     NSApplication.shared.dockTile.badgeLabel = nil
                 }
             }
-        case "externalLink":
+        case .externalLink:
             if let urlString = message.body as? String, let url = URL(string: urlString) {
                 NSWorkspace.shared.open(url)
             }
-        default:
-            break
         }
     }
 
@@ -156,7 +155,7 @@ final class WebViewCoordinator: NSObject,
         content.title = title
         content.body = (dict["body"] as? String) ?? ""
         content.sound = SettingsManager.shared.soundEnabled ? .default : nil
-        content.categoryIdentifier = "MESSAGE"
+        content.categoryIdentifier = Constants.notificationCategory
 
         let identifier = (dict["tag"] as? String) ?? UUID().uuidString
 

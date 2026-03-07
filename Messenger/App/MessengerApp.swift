@@ -112,8 +112,7 @@ struct MessengerApp: App {
             ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
             for: fbRecords
         )
-        let url = URL(string: "https://www.facebook.com/messages/")!
-        appState.webView?.load(URLRequest(url: url))
+        appState.webView?.load(URLRequest(url: Constants.messengerURL))
     }
 }
 
