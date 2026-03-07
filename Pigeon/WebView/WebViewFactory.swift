@@ -13,6 +13,7 @@ enum WebViewFactory {
         config.defaultWebpagePreferences = pagePrefs
 
         let contentController = WKUserContentController()
+        ContentInjector.injectScripts(into: contentController)
         config.userContentController = contentController
 
         return config

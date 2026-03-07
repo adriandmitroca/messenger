@@ -10,8 +10,12 @@
 		0951D54712B88C2D26CC9DF0 /* WebViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346B81A49AB8F6E858FB523 /* WebViewFactory.swift */; };
 		2CBC66D0420AD2D9EE08E296 /* MessengerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D70E2DACB04B7D8E2E4B7A /* MessengerWebView.swift */; };
 		3EFF40A1AF747F578FE189ED /* PigeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912040E21CDFDADEED5E48C /* PigeonApp.swift */; };
+		45EABD504EF7A60347583320 /* ContentInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99CA90D9D805257848AD7B /* ContentInjector.swift */; };
+		4C87E043FFA40051BB974D10 /* notification-bridge.js in Resources */ = {isa = PBXBuildFile; fileRef = A5F1794BEC920DBBFC6F5478 /* notification-bridge.js */; };
 		6B7F1B0DCC69A0277743EB72 /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC480B7CE2CE20823F8FEE /* WebViewCoordinator.swift */; };
+		7406C417735A5E5C0159CE3D /* facebook-cleanup.css in Resources */ = {isa = PBXBuildFile; fileRef = 96E2304701FF1E629DC5BDD0 /* facebook-cleanup.css */; };
 		91FF87B8CEDB9B8168604051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E633D8AF7F6A291AA08B3C36 /* Assets.xcassets */; };
+		95179540D0D6216370AFD181 /* facebook-cleanup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF5631AF9B9A6C9852D8FA /* facebook-cleanup.js */; };
 		AF8FDE87B4E63275FFAF2011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF304424F2FC53BEDC13E9C2 /* AppDelegate.swift */; };
 		B6C16082405408700AF1D103 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D9959388B9C6409F15734 /* AppState.swift */; };
 /* End PBXBuildFile section */
@@ -20,9 +24,13 @@
 		0E9D9959388B9C6409F15734 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		237FB671339C7BD60E070D84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2ACC480B7CE2CE20823F8FEE /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
+		3C99CA90D9D805257848AD7B /* ContentInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInjector.swift; sourceTree = "<group>"; };
 		47D70E2DACB04B7D8E2E4B7A /* MessengerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWebView.swift; sourceTree = "<group>"; };
 		4912040E21CDFDADEED5E48C /* PigeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonApp.swift; sourceTree = "<group>"; };
+		7AEF5631AF9B9A6C9852D8FA /* facebook-cleanup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "facebook-cleanup.js"; sourceTree = "<group>"; };
+		96E2304701FF1E629DC5BDD0 /* facebook-cleanup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "facebook-cleanup.css"; sourceTree = "<group>"; };
 		A04A113353711EA6C8B406FA /* Pigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5F1794BEC920DBBFC6F5478 /* notification-bridge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "notification-bridge.js"; sourceTree = "<group>"; };
 		B346B81A49AB8F6E858FB523 /* WebViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFactory.swift; sourceTree = "<group>"; };
 		C39A4A7BAA27B953D5873E00 /* Pigeon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pigeon.entitlements; sourceTree = "<group>"; };
 		E633D8AF7F6A291AA08B3C36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,9 +56,20 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		470243AFA19C6FB89DD5EE49 /* Injection */ = {
+			isa = PBXGroup;
+			children = (
+				96E2304701FF1E629DC5BDD0 /* facebook-cleanup.css */,
+				7AEF5631AF9B9A6C9852D8FA /* facebook-cleanup.js */,
+				A5F1794BEC920DBBFC6F5478 /* notification-bridge.js */,
+			);
+			path = Injection;
+			sourceTree = "<group>";
+		};
 		53AC92F864C7EC425957C075 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
+				3C99CA90D9D805257848AD7B /* ContentInjector.swift */,
 				2ACC480B7CE2CE20823F8FEE /* WebViewCoordinator.swift */,
 				B346B81A49AB8F6E858FB523 /* WebViewFactory.swift */,
 			);
@@ -79,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				4154D6B8ED6A61DFF31EEF2A /* App */,
+				470243AFA19C6FB89DD5EE49 /* Injection */,
 				5D38FC52C82CB036BF7788FE /* Resources */,
 				0612EF934A9B35651A2C25A7 /* Views */,
 				53AC92F864C7EC425957C075 /* WebView */,
@@ -151,6 +171,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				91FF87B8CEDB9B8168604051 /* Assets.xcassets in Resources */,
+				7406C417735A5E5C0159CE3D /* facebook-cleanup.css in Resources */,
+				95179540D0D6216370AFD181 /* facebook-cleanup.js in Resources */,
+				4C87E043FFA40051BB974D10 /* notification-bridge.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +186,7 @@
 			files = (
 				AF8FDE87B4E63275FFAF2011 /* AppDelegate.swift in Sources */,
 				B6C16082405408700AF1D103 /* AppState.swift in Sources */,
+				45EABD504EF7A60347583320 /* ContentInjector.swift in Sources */,
 				2CBC66D0420AD2D9EE08E296 /* MessengerWebView.swift in Sources */,
 				3EFF40A1AF747F578FE189ED /* PigeonApp.swift in Sources */,
 				6B7F1B0DCC69A0277743EB72 /* WebViewCoordinator.swift in Sources */,
