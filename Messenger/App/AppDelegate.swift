@@ -1,7 +1,8 @@
 import AppKit
 import UserNotifications
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+@MainActor
+final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         configureMainWindow()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
@@ -40,31 +41,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-}
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(
+    // MARK: - UNUserNotificationCenterDelegate
+
+    nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse,
-        withCompletionHandler completionHandler: @escaping () -> Void
-    ) {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        completionHandler()
+        didReceive response: UNNotificationResponse
+    ) async {
+        await MainActor.run {
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        }
     }
 
-    func userNotificationCenter(
+    nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        if NSApplication.shared.isActive {
-            completionHandler([])
-        } else {
-            var options: UNNotificationPresentationOptions = [.banner, .badge]
-            if UserDefaults.standard.bool(forKey: "soundEnabled") {
-                options.insert(.sound)
+        willPresent notification: UNNotification
+    ) async -> UNNotificationPresentationOptions {
+        return await MainActor.run {
+            if NSApplication.shared.isActive {
+                return []
+            } else {
+                var options: UNNotificationPresentationOptions = [.banner, .badge]
+                if UserDefaults.standard.bool(forKey: "soundEnabled") {
+                    options.insert(.sound)
+                }
+                return options
             }
-            completionHandler(options)
         }
     }
 }
