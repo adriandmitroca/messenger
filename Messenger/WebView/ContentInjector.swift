@@ -3,26 +3,50 @@ import WebKit
 
 @MainActor
 enum ContentInjector {
-    static func loadCSS() -> String? {
-        guard let url = Bundle.main.url(forResource: "facebook-cleanup", withExtension: "css"),
-              let css = try? String(contentsOf: url, encoding: .utf8) else {
+    #if DEBUG
+    private static let sourceRoot: String? = {
+        // Walk up from the bundle to find the project source directory
+        var url = Bundle.main.bundleURL
+        for _ in 0..<5 {
+            url = url.deletingLastPathComponent()
+            let candidate = url.appendingPathComponent("Messenger/Injection")
+            if FileManager.default.fileExists(atPath: candidate.path) {
+                print("[Messenger] Hot reload from: \(candidate.path)")
+                return candidate.path
+            }
+        }
+        return nil
+    }()
+    #endif
+
+    private static func loadFile(name: String, ext: String) -> String? {
+        #if DEBUG
+        if let root = sourceRoot {
+            let path = "\(root)/\(name).\(ext)"
+            if let content = try? String(contentsOfFile: path, encoding: .utf8) {
+                return content
+            }
+        }
+        #endif
+        guard let url = Bundle.main.url(forResource: name, withExtension: ext),
+              let content = try? String(contentsOf: url, encoding: .utf8) else {
             return nil
         }
-        return css
+        return content
+    }
+
+    static func loadCSS() -> String? {
+        loadFile(name: "facebook-cleanup", ext: "css")
     }
 
     static func loadJS() -> String? {
         let files = ["facebook-cleanup", "notification-bridge"]
         var combined = ""
-
         for file in files {
-            guard let url = Bundle.main.url(forResource: file, withExtension: "js"),
-                  let js = try? String(contentsOf: url, encoding: .utf8) else {
-                continue
+            if let js = loadFile(name: file, ext: "js") {
+                combined += js + "\n"
             }
-            combined += js + "\n"
         }
-
         return combined.isEmpty ? nil : combined
     }
 
