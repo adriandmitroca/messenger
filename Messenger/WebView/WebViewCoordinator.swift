@@ -27,7 +27,7 @@ final class WebViewCoordinator: NSObject,
                 handleNotification(message.body)
             }
         case "unreadCount":
-            if let count = message.body as? Int {
+            if let count = message.body as? Int, count != appState.unreadCount {
                 DispatchQueue.main.async {
                     self.appState.unreadCount = count
                     if SettingsManager.shared.dockBadgeEnabled {

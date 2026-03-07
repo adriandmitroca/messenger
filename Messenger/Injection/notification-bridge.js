@@ -34,22 +34,24 @@
     });
 
     // === UNREAD COUNT OBSERVER ===
-    const titleObserver = new MutationObserver(() => {
+    let lastCount = -1;
+
+    function sendUnreadCount() {
         const title = document.title;
         const match = title.match(/\((\d+)\)/);
         const count = match ? parseInt(match[1], 10) : 0;
-        window.webkit.messageHandlers.unreadCount.postMessage(count);
-    });
+        if (count !== lastCount) {
+            lastCount = count;
+            window.webkit.messageHandlers.unreadCount.postMessage(count);
+        }
+    }
+
+    const titleObserver = new MutationObserver(sendUnreadCount);
 
     const titleElement = document.querySelector('title');
     if (titleElement) {
         titleObserver.observe(titleElement, { childList: true });
     }
 
-    setInterval(() => {
-        const title = document.title;
-        const match = title.match(/\((\d+)\)/);
-        const count = match ? parseInt(match[1], 10) : 0;
-        window.webkit.messageHandlers.unreadCount.postMessage(count);
-    }, 5000);
+    setInterval(sendUnreadCount, 5000);
 })();

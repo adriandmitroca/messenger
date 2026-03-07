@@ -19,6 +19,7 @@ final class StatusBarController: NSObject {
         }
 
         cancellable = appState.$unreadCount
+            .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink { [weak self] count in
                 self?.updateBadge(count: count)
