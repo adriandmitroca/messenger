@@ -9,10 +9,15 @@
         '.notificationContainer:not([data-messenger])',
     ];
 
-    const observer = new MutationObserver((mutations) => {
-        for (const selector of SELECTORS_TO_REMOVE) {
-            document.querySelectorAll(selector).forEach(el => el.remove());
-        }
+    let cleanupTimer = null;
+    const observer = new MutationObserver(() => {
+        if (cleanupTimer) return;
+        cleanupTimer = setTimeout(() => {
+            cleanupTimer = null;
+            for (const selector of SELECTORS_TO_REMOVE) {
+                document.querySelectorAll(selector).forEach(el => el.remove());
+            }
+        }, 200);
     });
 
     observer.observe(document.body, {
