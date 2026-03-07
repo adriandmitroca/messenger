@@ -28,7 +28,18 @@ enum ContentInjector {
 
     static func injectScripts(into contentController: WKUserContentController) {
         if let css = loadCSS() {
-            let cssScript = WKUserScript(
+            let earlyCSS = WKUserScript(
+                source: """
+                    var style = document.createElement('style');
+                    style.textContent = `\(css)`;
+                    (document.head || document.documentElement).appendChild(style);
+                """,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+            contentController.addUserScript(earlyCSS)
+
+            let lateCSS = WKUserScript(
                 source: """
                     var style = document.createElement('style');
                     style.textContent = `\(css)`;
@@ -37,7 +48,7 @@ enum ContentInjector {
                 injectionTime: .atDocumentEnd,
                 forMainFrameOnly: true
             )
-            contentController.addUserScript(cssScript)
+            contentController.addUserScript(lateCSS)
         }
 
         if let js = loadJS() {

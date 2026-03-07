@@ -4,6 +4,12 @@
 div[role="banner"],
 div[aria-label="Facebook"] {
     display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Facebook stories in Messenger */
@@ -31,9 +37,46 @@ div[aria-label="Account"] {
     display: none !important;
 }
 
-/* === DARK MODE SUPPORT === */
+/* === LAYOUT: collapse whitespace from hidden nav === */
+:root {
+    --header-height: 0px !important;
+    --messenger-card-background: transparent !important;
+}
+
+.__fb-dark-mode {
+    --surface-background: transparent !important;
+    --media-inner-border: transparent !important;
+    --messenger-card-box-shadow: none !important;
+}
+
+.x85a59c, .x1bc3s5a {
+    max-height: 100vh !important;
+}
+
+[aria-label="Thread list"] {
+    padding-top: 25px;
+}
+
+[aria-label="Thread list"] + div > div {
+    margin-top: -14px;
+}
+
+.x166lnxr {
+    padding-right: 0 !important;
+}
+
+/* === NATIVE BACKGROUND === */
 @media (prefers-color-scheme: dark) {
     :root {
         color-scheme: dark;
+    }
+    html, body {
+        background-color: #242526 !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html, body {
+        background-color: #ffffff !important;
     }
 }
