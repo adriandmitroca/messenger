@@ -5,7 +5,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             if granted {
-                print("[Pigeon] Notification permission granted")
+                print("[Messenger] Notification permission granted")
             }
         }
         UNUserNotificationCenter.current().delegate = self

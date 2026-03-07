@@ -2,7 +2,7 @@ import SwiftUI
 import WebKit
 
 @main
-struct PigeonApp: App {
+struct MessengerApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState()
     @State private var statusBar: StatusBarController?

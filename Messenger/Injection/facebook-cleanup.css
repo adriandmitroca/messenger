@@ -1,13 +1,8 @@
 /* === HIDE FACEBOOK NAVIGATION & CHROME === */
 
-/* Top navigation bar */
+/* Top navigation bar — hide and collapse the space */
 div[role="banner"],
 div[aria-label="Facebook"] {
-    display: none !important;
-}
-
-/* Left sidebar (News Feed, Marketplace, Groups, etc.) */
-div[role="navigation"]:not([aria-label*="Messenger"]):not([aria-label*="Chat"]) {
     display: none !important;
 }
 
@@ -34,13 +29,6 @@ div[aria-label="Create"],
 div[aria-label="Notifications"],
 div[aria-label="Account"] {
     display: none !important;
-}
-
-/* === EXPAND MESSENGER TO FULL WIDTH === */
-
-div[role="main"] {
-    margin-left: 0 !important;
-    max-width: 100% !important;
 }
 
 /* === DARK MODE SUPPORT === */

@@ -5,6 +5,8 @@ enum WebViewFactory {
     static func makeConfiguration() -> WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
+        config.mediaTypesRequiringUserActionForPlayback = []
+        config.allowsAirPlayForMediaPlayback = true
 
         let pagePrefs = WKWebpagePreferences()
         pagePrefs.allowsContentJavaScript = true

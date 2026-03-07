@@ -12,7 +12,7 @@ final class StatusBarController: NSObject {
         if let button = statusItem?.button {
             button.image = NSImage(
                 systemSymbolName: "message.fill",
-                accessibilityDescription: "Pigeon"
+                accessibilityDescription: "Messenger"
             )
             button.target = self
             button.action = #selector(statusItemClicked)
@@ -29,7 +29,7 @@ final class StatusBarController: NSObject {
         guard let button = statusItem?.button else { return }
         button.image = NSImage(
             systemSymbolName: count > 0 ? "message.badge.fill" : "message.fill",
-            accessibilityDescription: "Pigeon"
+            accessibilityDescription: "Messenger"
         )
     }
 

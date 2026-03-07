@@ -10,8 +10,8 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Pigeon needs camera access for video calls.</string>
+	<string>Messenger needs camera access for video calls.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Pigeon needs microphone access for voice and video calls.</string>
+	<string>Messenger needs microphone access for voice and video calls.</string>
 </dict>
 </plist>
