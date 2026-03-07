@@ -9,6 +9,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         UNUserNotificationCenter.current().delegate = self
+
+        let replyAction = UNTextInputNotificationAction(
+            identifier: "REPLY",
+            title: "Reply",
+            textInputButtonTitle: "Send",
+            textInputPlaceholder: "Type a message..."
+        )
+        let category = UNNotificationCategory(
+            identifier: "MESSAGE",
+            actions: [replyAction],
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

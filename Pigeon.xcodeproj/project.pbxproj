@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0951D54712B88C2D26CC9DF0 /* WebViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346B81A49AB8F6E858FB523 /* WebViewFactory.swift */; };
 		2CBC66D0420AD2D9EE08E296 /* MessengerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D70E2DACB04B7D8E2E4B7A /* MessengerWebView.swift */; };
+		33DBFA0EE207AC141F2F5E00 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF8340E2A70F58ADF407AB6 /* StatusBarController.swift */; };
 		3EFF40A1AF747F578FE189ED /* PigeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912040E21CDFDADEED5E48C /* PigeonApp.swift */; };
 		45EABD504EF7A60347583320 /* ContentInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99CA90D9D805257848AD7B /* ContentInjector.swift */; };
 		4C87E043FFA40051BB974D10 /* notification-bridge.js in Resources */ = {isa = PBXBuildFile; fileRef = A5F1794BEC920DBBFC6F5478 /* notification-bridge.js */; };
@@ -32,6 +33,7 @@
 		A04A113353711EA6C8B406FA /* Pigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F1794BEC920DBBFC6F5478 /* notification-bridge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "notification-bridge.js"; sourceTree = "<group>"; };
 		B346B81A49AB8F6E858FB523 /* WebViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFactory.swift; sourceTree = "<group>"; };
+		BDF8340E2A70F58ADF407AB6 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		C39A4A7BAA27B953D5873E00 /* Pigeon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pigeon.entitlements; sourceTree = "<group>"; };
 		E633D8AF7F6A291AA08B3C36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF304424F2FC53BEDC13E9C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				47D70E2DACB04B7D8E2E4B7A /* MessengerWebView.swift */,
+				BDF8340E2A70F58ADF407AB6 /* StatusBarController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				45EABD504EF7A60347583320 /* ContentInjector.swift in Sources */,
 				2CBC66D0420AD2D9EE08E296 /* MessengerWebView.swift in Sources */,
 				3EFF40A1AF747F578FE189ED /* PigeonApp.swift in Sources */,
+				33DBFA0EE207AC141F2F5E00 /* StatusBarController.swift in Sources */,
 				6B7F1B0DCC69A0277743EB72 /* WebViewCoordinator.swift in Sources */,
 				0951D54712B88C2D26CC9DF0 /* WebViewFactory.swift in Sources */,
 			);
