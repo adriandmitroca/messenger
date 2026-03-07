@@ -13,6 +13,8 @@ xcodebuild build \
   -scheme "$SCHEME" \
   -configuration Release \
   -derivedDataPath build/derived \
+  CODE_SIGN_IDENTITY="-" \
+  CODE_SIGNING_REQUIRED=NO \
   -quiet
 
 mkdir -p build/release

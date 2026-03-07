@@ -9,6 +9,8 @@
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
+	<key>SUPublicEDKey</key>
+	<string>wXp0xO9AuKVLIn4iegiMerDASh/NZt44zi1JFolPWfo=</string>
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/adriandmitroca/messenger/main/appcast.xml</string>
 	<key>NSCameraUsageDescription</key>
