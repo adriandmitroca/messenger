@@ -23,12 +23,11 @@ final class StatusBarController: NSObject {
 
         appState.$unreadCount
             .removeDuplicates()
-            .receive(on: RunLoop.main)
             .sink { [weak self] _ in self?.updateBadge() }
             .store(in: &cancellables)
 
         SettingsManager.shared.$menuBarBadgeEnabled
-            .receive(on: RunLoop.main)
+            .removeDuplicates()
             .sink { [weak self] _ in self?.updateBadge() }
             .store(in: &cancellables)
     }
