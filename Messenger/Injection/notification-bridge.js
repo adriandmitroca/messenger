@@ -40,36 +40,54 @@
     if (window.__messengerUnreadInterval) {
         clearInterval(window.__messengerUnreadInterval);
     }
-    if (window.__messengerTitleObserver) {
-        window.__messengerTitleObserver.disconnect();
+    if (window.__messengerThreadObserver) {
+        window.__messengerThreadObserver.disconnect();
     }
 
     let lastCount = -1;
-    let debounceTimer = null;
+
+    function countUnreadConversations() {
+        let count = 0;
+        const rows = document.querySelectorAll('[role="row"]');
+        for (const row of rows) {
+            const spans = row.querySelectorAll('span[dir="auto"]');
+            if (spans.length < 2) continue;
+            // Unread conversations have bold (fontWeight >= 600) message preview
+            const weight = parseInt(getComputedStyle(spans[1]).fontWeight, 10);
+            if (weight >= 600) count++;
+        }
+        return count;
+    }
 
     function sendUnreadCount() {
-        const title = document.title;
-        const match = title.match(/\((\d+)\)/);
-        const count = match ? parseInt(match[1], 10) : 0;
+        const count = countUnreadConversations();
         if (count !== lastCount) {
             lastCount = count;
             window.webkit.messageHandlers.unreadCount.postMessage(count);
         }
     }
 
+    let debounceTimer = null;
     function debouncedSendUnreadCount() {
         if (debounceTimer) clearTimeout(debounceTimer);
         debounceTimer = setTimeout(sendUnreadCount, 500);
     }
 
-    const titleObserver = new MutationObserver(debouncedSendUnreadCount);
-    window.__messengerTitleObserver = titleObserver;
-
-    const titleElement = document.querySelector('title');
-    if (titleElement) {
-        titleObserver.observe(titleElement, { childList: true });
+    // Watch thread list for DOM changes (new messages, read state changes)
+    const threadList = document.querySelector('[aria-label="Thread list"]');
+    if (threadList) {
+        const threadObserver = new MutationObserver(debouncedSendUnreadCount);
+        window.__messengerThreadObserver = threadObserver;
+        threadObserver.observe(threadList, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class'],
+        });
     }
 
+    // Send immediately, then poll as fallback
+    sendUnreadCount();
     window.__messengerUnreadInterval = setInterval(sendUnreadCount, 5000);
     window.__messengerNotificationBridgeInstalled = true;
 })();
