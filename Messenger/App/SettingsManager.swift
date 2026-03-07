@@ -6,17 +6,25 @@ import ServiceManagement
 final class SettingsManager: ObservableObject {
     static let shared = SettingsManager()
 
+    private enum Keys {
+        static let notificationsEnabled = "notificationsEnabled"
+        static let soundEnabled = "soundEnabled"
+        static let dockBadgeEnabled = "dockBadgeEnabled"
+        static let menuBarBadgeEnabled = "menuBarBadgeEnabled"
+        static let launchAtLogin = "launchAtLogin"
+    }
+
     @Published var notificationsEnabled: Bool {
-        didSet { UserDefaults.standard.set(notificationsEnabled, forKey: "notificationsEnabled") }
+        didSet { UserDefaults.standard.set(notificationsEnabled, forKey: Keys.notificationsEnabled) }
     }
 
     @Published var soundEnabled: Bool {
-        didSet { UserDefaults.standard.set(soundEnabled, forKey: "soundEnabled") }
+        didSet { UserDefaults.standard.set(soundEnabled, forKey: Keys.soundEnabled) }
     }
 
     @Published var dockBadgeEnabled: Bool {
         didSet {
-            UserDefaults.standard.set(dockBadgeEnabled, forKey: "dockBadgeEnabled")
+            UserDefaults.standard.set(dockBadgeEnabled, forKey: Keys.dockBadgeEnabled)
             if !dockBadgeEnabled {
                 NSApplication.shared.dockTile.badgeLabel = nil
             }
@@ -24,37 +32,30 @@ final class SettingsManager: ObservableObject {
     }
 
     @Published var menuBarBadgeEnabled: Bool {
-        didSet { UserDefaults.standard.set(menuBarBadgeEnabled, forKey: "menuBarBadgeEnabled") }
+        didSet { UserDefaults.standard.set(menuBarBadgeEnabled, forKey: Keys.menuBarBadgeEnabled) }
     }
 
     @Published var launchAtLogin: Bool {
         didSet {
-            UserDefaults.standard.set(launchAtLogin, forKey: "launchAtLogin")
+            UserDefaults.standard.set(launchAtLogin, forKey: Keys.launchAtLogin)
             updateLaunchAtLogin()
         }
     }
 
     private init() {
+        UserDefaults.standard.register(defaults: [
+            Keys.notificationsEnabled: true,
+            Keys.soundEnabled: true,
+            Keys.dockBadgeEnabled: true,
+            Keys.menuBarBadgeEnabled: true,
+        ])
+
         let defaults = UserDefaults.standard
-
-        if defaults.object(forKey: "notificationsEnabled") == nil {
-            defaults.set(true, forKey: "notificationsEnabled")
-        }
-        if defaults.object(forKey: "soundEnabled") == nil {
-            defaults.set(true, forKey: "soundEnabled")
-        }
-        if defaults.object(forKey: "dockBadgeEnabled") == nil {
-            defaults.set(true, forKey: "dockBadgeEnabled")
-        }
-        if defaults.object(forKey: "menuBarBadgeEnabled") == nil {
-            defaults.set(true, forKey: "menuBarBadgeEnabled")
-        }
-
-        self.notificationsEnabled = defaults.bool(forKey: "notificationsEnabled")
-        self.soundEnabled = defaults.bool(forKey: "soundEnabled")
-        self.dockBadgeEnabled = defaults.bool(forKey: "dockBadgeEnabled")
-        self.menuBarBadgeEnabled = defaults.bool(forKey: "menuBarBadgeEnabled")
-        self.launchAtLogin = defaults.bool(forKey: "launchAtLogin")
+        self.notificationsEnabled = defaults.bool(forKey: Keys.notificationsEnabled)
+        self.soundEnabled = defaults.bool(forKey: Keys.soundEnabled)
+        self.dockBadgeEnabled = defaults.bool(forKey: Keys.dockBadgeEnabled)
+        self.menuBarBadgeEnabled = defaults.bool(forKey: Keys.menuBarBadgeEnabled)
+        self.launchAtLogin = defaults.bool(forKey: Keys.launchAtLogin)
     }
 
     private func updateLaunchAtLogin() {
