@@ -1,31 +1,25 @@
 # Messenger for macOS
 
-A beautiful, native macOS app for Facebook Messenger. No browser tabs, no distractions — just your conversations.
+A lightweight, native macOS replacement for the discontinued Facebook Messenger desktop app. No Electron, no browser tabs — just your conversations in a proper Mac app.
 
-## Why Messenger?
+## Why?
 
-Facebook doesn't offer a dedicated Messenger app for Mac. You're stuck with a browser tab buried among dozens of others, or the clunky Electron-based alternatives that eat your RAM.
+Meta killed the official Messenger app for Mac. Your options are a browser tab lost among dozens of others, or bloated Electron wrappers. This app is a thin native shell (~5MB) around Messenger's web interface, with the features you'd expect from a real Mac app:
 
-Messenger gives you a lightweight, native wrapper that feels like it belongs on your Mac:
+- **Native notifications** with reply support directly from the banner
+- **Dock badge** and **menu bar icon** for unread count at a glance
+- **Video & voice calls** — camera and microphone just work
+- **Keyboard shortcuts** — Cmd+N new message, Cmd+F search, Cmd+R reload
+- **Dark mode** — follows your system appearance automatically
+- **Launch at login** — always ready
+- **Auto-updates** via Sparkle
+- **Close to tray** — closing the window keeps the app running in the background
 
-- **Native notifications** — get notified like any other Mac app, with reply support right from the banner
-- **Menu bar icon** — see unread messages at a glance without switching windows
-- **Dock badge** — unread count on the dock, just like Mail or Messages
-- **Video & voice calls** — camera and microphone work out of the box
-- **Keyboard shortcuts** — Cmd+N for new message, Cmd+F to search, Cmd+R to reload
-- **Dark mode** — follows your system appearance
-- **Launch at login** — always ready when you need it
-- **Auto-updates** — stays up to date via Sparkle
-
-All of Facebook's UI clutter — the news feed links, stories, marketplace, ads — is stripped away. You get Messenger and nothing else.
+No news feed, no stories, no marketplace. Just Messenger.
 
 ## Install
 
-### Requirements
-
-- macOS 14.0 (Sonoma) or later
-
-### Build from source
+Download the latest `.dmg` from [Releases](https://github.com/adriandmitroca/messenger/releases), or build from source:
 
 ```bash
 brew install xcodegen
@@ -35,15 +29,7 @@ xcodegen generate
 open Messenger.xcodeproj
 ```
 
-Build and run from Xcode (Cmd+R).
-
-## Settings
-
-Open Preferences (Cmd+,) to configure:
-
-- **Notifications** — toggle notifications, sound, dock badge, and menu bar badge independently
-- **Launch at login** — start Messenger when you log in
-- **Auto-updates** — check for updates automatically or manually
+Requires macOS 14.0 (Sonoma) or later.
 
 ## License
 
