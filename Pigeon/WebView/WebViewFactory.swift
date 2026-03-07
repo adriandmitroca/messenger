@@ -1,12 +1,10 @@
 import WebKit
 
+@MainActor
 enum WebViewFactory {
     static func makeConfiguration() -> WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.allowsInlineMediaPlayback = true
-        config.mediaTypesRequiringUserActionForPlayback = []
-        config.allowsAirPlayForMediaPlayback = true
 
         let pagePrefs = WKWebpagePreferences()
         pagePrefs.allowsContentJavaScript = true

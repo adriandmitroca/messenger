@@ -1,6 +1,7 @@
 import Foundation
 import WebKit
 
+@MainActor
 enum ContentInjector {
     static func loadCSS() -> String? {
         guard let url = Bundle.main.url(forResource: "facebook-cleanup", withExtension: "css"),

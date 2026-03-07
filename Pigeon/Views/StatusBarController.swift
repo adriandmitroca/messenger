@@ -1,6 +1,7 @@
 import AppKit
 import Combine
 
+@MainActor
 final class StatusBarController {
     private var statusItem: NSStatusItem?
     private var cancellable: AnyCancellable?

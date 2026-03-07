@@ -51,23 +51,20 @@ final class WebViewCoordinator: NSObject,
 
     func webView(
         _ webView: WKWebView,
-        decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-    ) {
+        decidePolicyFor navigationAction: WKNavigationAction
+    ) async -> WKNavigationActionPolicy {
         guard let url = navigationAction.request.url else {
-            decisionHandler(.allow)
-            return
+            return .allow
         }
 
         let host = url.host ?? ""
-
         let isAllowed = Self.allowedDomains.contains { host.hasSuffix($0) }
 
         if isAllowed || url.scheme == "about" || url.scheme == "data" {
-            decisionHandler(.allow)
+            return .allow
         } else {
-            decisionHandler(.cancel)
             NSWorkspace.shared.open(url)
+            return .cancel
         }
     }
 
@@ -92,15 +89,14 @@ final class WebViewCoordinator: NSObject,
 
     func webView(
         _ webView: WKWebView,
-        requestMediaCapturePermissionFor origin: WKSecurityOrigin,
-        initiatedByFrame frame: WKFrameInfo,
-        type: WKMediaCaptureType,
-        decisionHandler: @escaping (WKPermissionDecision) -> Void
-    ) {
+        decideMediaCapturePermissionsFor origin: WKSecurityOrigin,
+        initiatedBy frame: WKFrameInfo,
+        type: WKMediaCaptureType
+    ) async -> WKPermissionDecision {
         if origin.host.contains("facebook.com") || origin.host.contains("messenger.com") {
-            decisionHandler(.grant)
+            return .grant
         } else {
-            decisionHandler(.deny)
+            return .deny
         }
     }
 
@@ -113,11 +109,9 @@ final class WebViewCoordinator: NSObject,
 
     func download(_ download: WKDownload,
                   decideDestinationUsing response: URLResponse,
-                  suggestedFilename: String,
-                  completionHandler: @escaping (URL?) -> Void) {
+                  suggestedFilename: String) async -> URL? {
         let downloadsURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let destinationURL = downloadsURL.appendingPathComponent(suggestedFilename)
-        completionHandler(destinationURL)
+        return downloadsURL.appendingPathComponent(suggestedFilename)
     }
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
