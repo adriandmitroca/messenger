@@ -106,10 +106,11 @@ struct MessengerApp: App {
 
     private func logout() async {
         let dataStore = WKWebsiteDataStore.default()
-        let records = await dataStore.dataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
+        let dataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
+        let records = await dataStore.dataRecords(ofTypes: dataTypes)
         let fbRecords = records.filter { $0.displayName.contains("facebook") }
         await dataStore.removeData(
-            ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+            ofTypes: dataTypes,
             for: fbRecords
         )
         appState.webView?.load(URLRequest(url: Constants.messengerURL))
