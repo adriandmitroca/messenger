@@ -7,8 +7,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
     private var windowRetryCount = 0
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-            if granted {
+        Task {
+            let granted = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
+            if granted == true {
                 print("[Messenger] Notification permission granted")
             }
         }
