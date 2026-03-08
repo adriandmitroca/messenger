@@ -12,10 +12,11 @@ struct MessengerApp: App {
 
     init() {
         updaterController = SPUStandardUpdaterController(
-            startingUpdater: false,
+            startingUpdater: true,
             updaterDelegate: nil,
             userDriverDelegate: nil
         )
+        updaterController.updater.automaticallyChecksForUpdates = false
     }
 
     var body: some Scene {
