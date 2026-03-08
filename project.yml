@@ -25,8 +25,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.messenger.app
         PRODUCT_NAME: Messenger
-        MARKETING_VERSION: "0.0.5"
-        CURRENT_PROJECT_VERSION: "6"
+        MARKETING_VERSION: "0.0.6"
+        CURRENT_PROJECT_VERSION: "7"
         SWIFT_VERSION: "6.0"
         INFOPLIST_FILE: Messenger/Resources/Info.plist
         CODE_SIGN_ENTITLEMENTS: Messenger/Resources/Messenger.entitlements
