@@ -81,5 +81,18 @@
         length="1545833"
       />
     </item>
+      <item>
+      <title>Version 0.0.7</title>
+      <sparkle:version>0.0.7</sparkle:version>
+      <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <pubDate>Sun, 08 Mar 2026 16:36:57 +0000</pubDate>
+      <enclosure
+        url="https://github.com/adriandmitroca/messenger/releases/download/v0.0.7/Messenger-0.0.7.dmg"
+        type="application/octet-stream"
+        sparkle:edSignature="DHbw4GuVmQV4dX1xmToni0+VTzmEe3G7X78PO/tgir2ZZfXvU0Ia5m+P8vMCU5AKfECWSIh4W1H6j4PKiZRgBQ=="
+        length="1545749"
+      />
+    </item>
   </channel>
 </rss>
