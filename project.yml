@@ -36,5 +36,7 @@ targets:
         Debug:
           CODE_SIGN_IDENTITY: "-"
           CODE_SIGNING_REQUIRED: "NO"
+          PRODUCT_BUNDLE_IDENTIFIER: com.messenger.app.dev
+          PRODUCT_NAME: "Messenger Dev"
         Release:
           CODE_SIGN_IDENTITY: "Developer ID Application"

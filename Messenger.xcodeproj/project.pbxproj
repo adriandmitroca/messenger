@@ -239,14 +239,14 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app;
 				PRODUCT_NAME = Messenger;
 				SDKROOT = macosx;
@@ -326,16 +326,16 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app;
-				PRODUCT_NAME = Messenger;
+				MARKETING_VERSION = 0.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app.dev;
+				PRODUCT_NAME = "Messenger Dev";
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 6.0;
