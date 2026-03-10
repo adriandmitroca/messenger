@@ -15,13 +15,13 @@
 		9492D8E092AF07BE81C4DA90 /* notification-bridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 1642BCB24F330295F4F85343 /* notification-bridge.js */; };
 		B9467E4DB826D16AB6AF88DA /* WebViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317516E3672539233560562F /* WebViewFactory.swift */; };
 		BF68C55B1A60EDADAD81891A /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F93F1DEDF54796A644C1B /* WebViewCoordinator.swift */; };
+		C1AC3C9E23E2F098C65D198F /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 8615618CCF5D99C706CFA303 /* Credits.html */; };
 		C942B4188EC12D828B4DC69F /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6931793957575AD2116BE /* SettingsManager.swift */; };
 		CB7DAE464A76C81EAA477EA8 /* MessengerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC769D84992B5E6C443B46 /* MessengerWebView.swift */; };
 		D470AA22B7B41719AB51EDBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EF838D2D6D8CF8479BCF8 /* AppDelegate.swift */; };
 		D7E2E89473E7BBD7A3E9E0C0 /* MessengerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD3A66817D2EA023DD03F5F /* MessengerApp.swift */; };
 		EA1E79E079256BC59DEFA6CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC49707ABFE0A6767C867CE9 /* Assets.xcassets */; };
 		F2AC0F4CBB2A1556B645E08D /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126FF3A11F3A912F21E05D8B /* StatusBarController.swift */; };
-		F485A9257DD3518D93BBDCBB /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = A3F719A117CD32D7A0212C72 /* Sparkle */; };
 		FCFB91E68FE4D1AE03D49D20 /* facebook-cleanup.js in Resources */ = {isa = PBXBuildFile; fileRef = E4B901147D9E10DC7E7097A9 /* facebook-cleanup.js */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +33,7 @@
 		317516E3672539233560562F /* WebViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFactory.swift; sourceTree = "<group>"; };
 		34999CF10F9E4722F8C20423 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7F8F93F1DEDF54796A644C1B /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
+		8615618CCF5D99C706CFA303 /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		8AFC769D84992B5E6C443B46 /* MessengerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWebView.swift; sourceTree = "<group>"; };
 		A71D435410193953B4614168 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88307D6F414B26B96DABC7F /* .gitignore */ = {isa = PBXFileReference; path = .gitignore; sourceTree = "<group>"; };
@@ -46,17 +47,6 @@
 		F5BFD7943F9A7137BBF6178C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FFD3A66817D2EA023DD03F5F /* MessengerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		D1D18D8DA8442365A8884B17 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F485A9257DD3518D93BBDCBB /* Sparkle in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1892D02000D649CE2C07239F /* App */ = {
@@ -134,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				CC49707ABFE0A6767C867CE9 /* Assets.xcassets */,
+				8615618CCF5D99C706CFA303 /* Credits.html */,
 				CDB81F556E745032FB280B37 /* Info.plist */,
 				2F3F042A77F8E79A74CE4294 /* Messenger.entitlements */,
 			);
@@ -149,7 +140,6 @@
 			buildPhases = (
 				D83EDAF1424EC5C80C030F74 /* Sources */,
 				077BF981134D863345B5416B /* Resources */,
-				D1D18D8DA8442365A8884B17 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,7 +147,6 @@
 			);
 			name = Messenger;
 			packageProductDependencies = (
-				A3F719A117CD32D7A0212C72 /* Sparkle */,
 			);
 			productName = Messenger;
 			productReference = A71D435410193953B4614168 /* Messenger.app */;
@@ -183,9 +172,6 @@
 			);
 			mainGroup = D4E0CF54C0D785D3A332EE71;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				295DA53B324890C3EC2E0CD2 /* XCRemoteSwiftPackageReference "Sparkle" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8DA6F63064AFB1E38F85041C /* Products */;
 			projectDirPath = "";
@@ -202,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1E79E079256BC59DEFA6CF /* Assets.xcassets in Resources */,
+				C1AC3C9E23E2F098C65D198F /* Credits.html in Resources */,
 				8369F0BB966272C670F2EFC0 /* facebook-cleanup.css in Resources */,
 				FCFB91E68FE4D1AE03D49D20 /* facebook-cleanup.js in Resources */,
 				9492D8E092AF07BE81C4DA90 /* notification-bridge.js in Resources */,
@@ -239,14 +226,14 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app;
 				PRODUCT_NAME = Messenger;
 				SDKROOT = macosx;
@@ -326,14 +313,14 @@
 				CODE_SIGN_ENTITLEMENTS = Messenger/Resources/Messenger.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				INFOPLIST_FILE = Messenger/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.messenger.app.dev;
 				PRODUCT_NAME = "Messenger Dev";
 				SDKROOT = macosx;
@@ -420,25 +407,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		295DA53B324890C3EC2E0CD2 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A3F719A117CD32D7A0212C72 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 295DA53B324890C3EC2E0CD2 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 316D79176FB3C5F1E903C790 /* Project object */;
 }

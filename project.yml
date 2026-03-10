@@ -6,11 +6,6 @@ options:
   xcodeVersion: "16.0"
   createIntermediateGroups: true
 
-packages:
-  Sparkle:
-    url: https://github.com/sparkle-project/Sparkle
-    from: "2.6.0"
-
 targets:
   Messenger:
     type: application
@@ -19,8 +14,6 @@ targets:
       - Messenger
       - path: .gitignore
         buildPhase: none
-    dependencies:
-      - package: Sparkle
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.messenger.app

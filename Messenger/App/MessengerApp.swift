@@ -1,23 +1,11 @@
 import SwiftUI
 import WebKit
-import Sparkle
 
 @main
 struct MessengerApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState()
     @State private var statusBar: StatusBarController?
-
-    private let updaterController: SPUStandardUpdaterController
-
-    init() {
-        updaterController = SPUStandardUpdaterController(
-            startingUpdater: true,
-            updaterDelegate: nil,
-            userDriverDelegate: nil
-        )
-        updaterController.updater.automaticallyChecksForUpdates = false
-    }
 
     var body: some Scene {
         WindowGroup {
@@ -87,16 +75,10 @@ struct MessengerApp: App {
                     }
                 }
             }
-
-            CommandGroup(after: .appInfo) {
-                Button("Check for Updates...") {
-                    updaterController.checkForUpdates(nil)
-                }
-            }
         }
 
         Settings {
-            SettingsView(updater: updaterController.updater)
+            SettingsView()
         }
     }
 
@@ -112,4 +94,3 @@ struct MessengerApp: App {
         appState.webView?.load(URLRequest(url: Constants.messengerURL))
     }
 }
-
