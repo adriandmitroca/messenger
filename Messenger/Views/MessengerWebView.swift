@@ -5,7 +5,7 @@ struct MessengerWebView: View {
     @EnvironmentObject var appState: AppState
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             WebViewWrapper()
                 .environmentObject(appState)
                 .opacity(appState.isLoading ? 0 : 1)
@@ -14,6 +14,10 @@ struct MessengerWebView: View {
                 loadingView
                     .transition(.opacity)
             }
+
+            WindowDragHandle()
+                .frame(height: 28)
+                .frame(maxWidth: .infinity)
         }
         .animation(.easeInOut(duration: 0.3), value: appState.isLoading)
     }
@@ -31,6 +35,27 @@ struct MessengerWebView: View {
                     .foregroundStyle(.secondary)
             }
         }
+    }
+}
+
+struct WindowDragHandle: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView {
+        let view = WindowDragView()
+        return view
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
+private class WindowDragView: NSView {
+    override func mouseDown(with event: NSEvent) {
+        window?.performDrag(with: event)
+    }
+
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        // Only intercept clicks that aren't on the traffic light buttons
+        let result = super.hitTest(point)
+        return result === self ? self : result
     }
 }
 
