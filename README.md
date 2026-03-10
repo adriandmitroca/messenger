@@ -12,7 +12,6 @@ Meta killed the official Messenger app for Mac. Your options are a browser tab l
 - **Keyboard shortcuts** — Cmd+N new message, Cmd+F search, Cmd+R reload
 - **Dark mode** — follows your system appearance automatically
 - **Launch at login** — always ready
-- **Auto-updates** via Sparkle
 - **Close to tray** — closing the window keeps the app running in the background
 
 No news feed, no stories, no marketplace. Just Messenger.
@@ -30,6 +29,12 @@ open Messenger.xcodeproj
 ```
 
 Requires macOS 14.0 (Sonoma) or later.
+
+> **Note:** This app is not code-signed or notarized yet. macOS will block it by default. After downloading, remove the quarantine attribute before opening:
+>
+> ```bash
+> xattr -cr /Applications/Messenger.app
+> ```
 
 ## License
 
